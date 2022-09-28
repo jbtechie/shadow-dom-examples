@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <h2>Example: Declarative Shadow DOM with Templates</h2>
+    <p>Host Element (should NOT be red)</p>
+    <div id="embed-container">
+      <template id="embed-template" shadowroot="open">
+        <style type="text/css">
+          p { color: red; }
+        </style>
+
+        <p>Embedded Element (should be red)</p>
+      </template>
+    </div>
+
+    <script>
+      // needed for browsers that don't support shadowroot attribute yet, which is most of them besides Chrome
+      const container = document.getElementById('embed-container')
+      if (!container.shadowRoot) {
+        const embeddedTemplate = document.getElementById('embed-template')
+        const shadowRoot = container.attachShadow({ mode: 'open' })
+        shadowRoot.innerHTML = embeddedTemplate.innerHTML
+      }
+    </script>
+  </body>
+</html>

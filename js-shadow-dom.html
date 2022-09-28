@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <h2>Example: JS Hydration with Shadow DOM</h2>
+    <p>Host Element (should NOT be red)</p>
+    <div id="embed-container"></div>
+
+    <script>
+      const embeddedHtml = `
+        <style type="text/css">
+          p { color: red; }
+        </style>
+
+        <p>Embedded Element (should be red)</p>
+      `
+
+      const container = document.getElementById('embed-container')
+      const shadowRoot = container.attachShadow({ mode: 'open' })
+      shadowRoot.innerHTML = embeddedHtml
+    </script>
+  </body>
+</html>
